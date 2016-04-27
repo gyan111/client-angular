@@ -5,11 +5,11 @@ angular.module('myApp', [
   // 'ngRoute',
   'ui.router',
   'myApp.jokes',
-  // 'myApp.view1',
   'myApp.view2',
   'myApp.auth',
-  'myApp.version'
+  'myApp.version',
+   'satellizer'
 ]).
-config(['$routeProvider', function($routeProvider) {
+ config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]);
