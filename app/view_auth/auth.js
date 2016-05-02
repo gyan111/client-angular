@@ -15,9 +15,6 @@ angular.module('myApp.auth', [])
   })
 }])
  
-.controller('AuthCtrl', ['$rootScope', function($rootScope){
- 
-}])
 .controller('AuthCtrl', ['$auth', '$state', '$http', '$rootScope', function($auth, $state, $http, $rootScope) {
   var vm = this;
 

@@ -11,9 +11,7 @@ angular.module('myApp', [
    'satellizer',
    'permission'
 ])
-
-
-.run(function (Permission, $rootScope, $state, $auth) {
+.run(function (RoleStore, $rootScope, $state, $auth) {
 	$rootScope.logout = function() {
         $auth.logout().then(function() {
             localStorage.removeItem('user');
@@ -23,9 +21,18 @@ angular.module('myApp', [
     }
     $rootScope.currentUser = JSON.parse(localStorage.getItem('user'));
 
-
-	Permission 
-     .defineRole('isloggedin', function (stateParams) {
+	RoleStore 
+	.defineRole('anonymous', function (stateParams) {
+        // If the returned value is *truthy* then the user has the role, otherwise they don't
+        // var User = JSON.parse(localStorage.getItem('user')); 
+        // console.log("anonymous ", $auth.isAuthenticated()); 
+        if (!$auth.isAuthenticated()) {
+          return true; // Is anonymous
+        }
+        return false;
+      })
+	RoleStore 
+     .defineRole('isloggedin',[], function (stateParams) {
         // If the returned value is *truthy* then the user has the role, otherwise they don't
         // console.log("isloggedin ", $auth.isAuthenticated()); 
         if ($auth.isAuthenticated()) {
